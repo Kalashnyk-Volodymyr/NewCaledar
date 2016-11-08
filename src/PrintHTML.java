@@ -7,38 +7,39 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public class PrintHTML extends Printer {
-    public PrintHTML(ArrayList<DayOfWeek> week){
+    public PrintHTML(ArrayList<DayOfWeek> week) {
         super(week);
-
         calendar = getHmlBegin();
-        setNameOfDays(week);
+        setWeekFromFirstDay(week);
+
+        wayOfPrint=WayOfPrint.HTML;
     }
 
-    private void setNameOfDays(ArrayList<DayOfWeek> week) {
-        calendar=calendar+"<tr>\n";
+    protected void setWeekFromFirstDay(ArrayList<DayOfWeek> week) {
+        calendar = calendar + "<tr>\n";
         for (DayOfWeek d : week)
-            calendar = calendar + "<th>"+
-                    d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)+"</th>\n";
-        calendar=calendar+"</tr>\n";
-    }
-    public void dayColor(int day, ColorDays color) {
-
-        calendar = calendar + color.getColorHTML()+ day + "</td>"+"\n";
-
+            calendar = calendar + "<th>" +
+                    d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "</th>\n";
+        calendar = calendar + "</tr>\n";
     }
 
-    public void nextWeek(){
-        calendar=calendar+"<tr>";
+    public void printDay(int day, ColorDays color) {
+        calendar = calendar + color.getColorHTML() + day + "</td>" + "\n";
     }
-    public void endWeekHtml(){
-        calendar=calendar+"</tr>";
+
+    public void nextWeek() {
+        calendar = calendar + "<tr>";
     }
-    public void ignorDay(){
-        calendar=calendar+"<td></td>";
+
+    public void endWeekHtml() { calendar = calendar + "</tr>"; }
+
+    public void ignoreDay() {
+        calendar = calendar + "<td></td>";
     }
-//=====================================================
-    private String getHmlBegin(){
-        String beginHtml="<!DOCTYPE html>\n" +
+
+    //=====================================================
+    private String getHmlBegin() {
+        String beginHtml = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "<meta charset=\"UTF-8\">\n" +
@@ -54,20 +55,22 @@ public class PrintHTML extends Printer {
                 "  }\n" +
                 "</style>\n" +
                 "</head>\n" +
-                "<body>\n"+
+                "<body>\n" +
                 "<table>\n";
 
-        return  beginHtml;
+        return beginHtml;
     }
+
     public String getHtmlEnd() {
-        String endHtml = "</table>\n"+
+        String endHtml = "</table>\n" +
                 "</body>\n" +
                 "</html>";
         return endHtml;
     }
+
     //======================================
     @Override
-    public String toString(){
-        return calendar + "\n"+getHtmlEnd();
+    public String toString() {
+        return calendar + "\n" + getHtmlEnd();
     }
 }

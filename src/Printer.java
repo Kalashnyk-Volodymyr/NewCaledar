@@ -7,20 +7,23 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public abstract class Printer {
-    protected    String calendar="";
-    public Printer(ArrayList<DayOfWeek> week){
-        setNameOfDays(week);
+    protected String calendar = "";
+    protected WayOfPrint wayOfPrint;
+    public Printer(ArrayList<DayOfWeek> week) {
+        setWeekFromFirstDay(week);
     }
+
     // Sat Sun ... Fri
-    private  void setNameOfDays(ArrayList<DayOfWeek> week) {
-        for (DayOfWeek d : week)
-            calendar = calendar + d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)+"\t";
-    }
-    public abstract void dayColor(int day, ColorDays color);
+    protected abstract void setWeekFromFirstDay(ArrayList<DayOfWeek> week);
+
+    public abstract void printDay(int day, ColorDays color);
+
     public abstract void nextWeek();
-    public abstract void ignorDay();
+
+    public abstract void ignoreDay();
+
     @Override
-    public String toString(){
+    public String toString() {
         return calendar;
     }
 }
