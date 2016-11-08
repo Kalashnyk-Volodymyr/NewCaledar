@@ -10,32 +10,18 @@ public class Calendar {
     private LocalDate firstDayOfMonth;
     private LocalDate toDay;
     private Printer printer;
-    private WayOfPrint wayOfPrint;
 
-    public Calendar(DayOfWeek firstDayOfWeek, WayOfPrint wayOfPrint) {
+
+    public Calendar(DayOfWeek firstDayOfWeek) {
         toDay = LocalDate.now();
         firstDayOfMonth = toDay.withDayOfMonth(1);
-
         setWeekStart(firstDayOfWeek);
-        this.wayOfPrint = wayOfPrint;
-
-        howToPrint();
     }
 
-    public Calendar(DayOfWeek firstDayOfWeek,WayOfPrint wayOfPrint,String yourDate) {
+    public Calendar(DayOfWeek firstDayOfWeek,String yourDate) {
         this.toDay = LocalDate.parse(yourDate);
         firstDayOfMonth = toDay.withDayOfMonth(1);
-
         setWeekStart(firstDayOfWeek);
-        this.wayOfPrint = wayOfPrint;
-
-        howToPrint();
-    }
-    private void howToPrint() {
-        if (wayOfPrint == WayOfPrint.HTML)
-            printer = new PrintConsole(weekStart);
-        else
-            printer = new PrintHTML(weekStart);
     }
 
     private void setWeekStart(DayOfWeek firstDayOfWeek) {
@@ -53,17 +39,31 @@ public class Calendar {
             weekend.add(d);
         }
     }
+  // =======================================================
+   private void howToPrint(WayOfPrint wayOfPrint) {
+       if (wayOfPrint == WayOfPrint.HTML)
+           printer = new PrintHTML(weekStart);
+       else
+           printer = new PrintConsole(weekStart);
+   }
 
-    public WayOfPrint getWayOfPrint(){
-        return wayOfPrint;
-    }
+   public WayOfPrint getWayPrint() {
+       if (printer instanceof PrintConsole)
+           return WayOfPrint.CONSOLE;
+       else
+           return WayOfPrint.HTML;
+   }
 
-    public void print(){
+
+    public void print(WayOfPrint wayOfPrint){
+
+        howToPrint(wayOfPrint);
+
         while (isCurrentMonth()){
             printWeek();
         }
     }
-
+    // ======================================================
     private void printWeek() {
         printer.nextWeek();
 
@@ -82,6 +82,7 @@ public class Calendar {
     }
 
     private void printDayWithColor(ColorDays colorDays){
+
         printer.printDay(firstDayOfMonth.getDayOfMonth(),colorDays);
     }
 

@@ -13,9 +13,11 @@ public class Main {
         Calendar cl=createCalendar(yourDate);
         cl.setHolidays(DayOfWeek.MONDAY,DayOfWeek.SUNDAY,DayOfWeek.THURSDAY);
 
-        cl.print();
+        cl.print(WayOfPrint.HTML);
 
-        writeIntoHTMLFile(cl);
+        if(cl.getWayPrint()==WayOfPrint.HTML)
+            writeIntoHTMLFile(cl);
+
         System.out.println(cl);
     }
 
@@ -23,24 +25,22 @@ public class Main {
         Calendar cl;
 
         if(yourDate.length() == 0)
-            cl=new Calendar(DayOfWeek.SATURDAY,WayOfPrint.CONSOLE);
+            cl=new Calendar(DayOfWeek.SATURDAY);
         else
-            cl=new Calendar(DayOfWeek.SATURDAY ,WayOfPrint.CONSOLE,yourDate);
+            cl=new Calendar(DayOfWeek.SATURDAY, yourDate);
 
         return cl;
     }
 
-    public static void writeIntoHTMLFile(Calendar cl){
-        if(cl.getWayOfPrint()==WayOfPrint.HTML) {
-            FileWriter fw;
-            try {
-                fw = new FileWriter(new File("mytextfile.html"));
-                fw.write(String.format(cl.toString()));
-                fw.write(System.lineSeparator());
-                fw.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+    public static void writeIntoHTMLFile(Calendar cl) {
+        FileWriter fw;
+        try {
+            fw = new FileWriter(new File("mytextfile.html"));
+            fw.write(String.format(cl.toString()));
+            fw.write(System.lineSeparator());
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="hamcrest-all-1.3">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../jar/hamcrest-all-1.3.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../jar/hamcrest-core-1.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../jar/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../jar/hamcrest-all-1.3.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../jar/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../jar/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../jar/unit-tests-master.zip!/unit-tests-master/test" />
+      <root url="jar://$PROJECT_DIR$/../../jar/unit-tests-master.zip!/unit-tests-master/test" />
     </SOURCES>
   </library>
 </component>

@@ -7,17 +7,15 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public class PrintHTML extends Printer {
-    public PrintHTML(ArrayList<DayOfWeek> week) {
-        super(week);
+    public PrintHTML(ArrayList<DayOfWeek> weekStart) {
+        super(weekStart);
         calendar = getHmlBegin();
-        setWeekFromFirstDay(week);
-
-        wayOfPrint=WayOfPrint.HTML;
+        setWeekStart(weekStart);
     }
 
-    protected void setWeekFromFirstDay(ArrayList<DayOfWeek> week) {
+    protected void setWeekStart(ArrayList<DayOfWeek> weekStart) {
         calendar = calendar + "<tr>\n";
-        for (DayOfWeek d : week)
+        for (DayOfWeek d : weekStart)
             calendar = calendar + "<th>" +
                     d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "</th>\n";
         calendar = calendar + "</tr>\n";
@@ -44,13 +42,13 @@ public class PrintHTML extends Printer {
                 "<head>\n" +
                 "<meta charset=\"UTF-8\">\n" +
                 "<style>\n" +
-                "td.Red {\n" +
+                ".Red {\n" +
                 "    color: red;\n" +
                 "  } \n" +
-                "td.Blue {\n" +
+                ".Blue {\n" +
                 "    color: blue;\n" +
                 "  } \n" +
-                "td.Black {\n" +
+                ".Black {\n" +
                 "    color: black;\n" +
                 "  }\n" +
                 "</style>\n" +

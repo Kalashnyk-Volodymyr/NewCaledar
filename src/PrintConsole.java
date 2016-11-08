@@ -7,14 +7,12 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public class PrintConsole extends Printer {
-    public PrintConsole(ArrayList<DayOfWeek> week) {
-        super(week);
-
-        wayOfPrint=WayOfPrint.CONSOLE;
+    public PrintConsole(ArrayList<DayOfWeek> weekStart) {
+        super(weekStart);
     }
 
-    protected void setWeekFromFirstDay(ArrayList<DayOfWeek> week) {
-        for (DayOfWeek d : week)
+    protected void setWeekStart(ArrayList<DayOfWeek> weekStart) {
+        for (DayOfWeek d : weekStart)
             calendar = calendar + d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "\t";
     }
 
