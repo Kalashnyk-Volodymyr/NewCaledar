@@ -7,23 +7,23 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public class PrintConsole extends Printer {
-    public PrintConsole(ArrayList<DayOfWeek> weekStart) {
-        super(weekStart);
-    }
+    private String calendar="";
+    //public String getCalendar(){return  calendar;}
 
-    protected void setWeekStart(ArrayList<DayOfWeek> weekStart) {
+    @Override
+    public void setWeekStart(ArrayList<DayOfWeek> weekStart) {
         for (DayOfWeek d : weekStart)
             calendar = calendar + d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "\t";
     }
-
+    @Override
     public void printDay(int day, ColorDays color) {
         calendar = calendar + color.getColorConsole() + day + ColorDays.RESET_COLOR.getColorConsole() + "\t";
     }
-
+    @Override
     public void nextWeek() {
         calendar = calendar + "\n";
     }
-
+    @Override
     public void ignoreDay() {
         calendar = calendar + "\t";
     }

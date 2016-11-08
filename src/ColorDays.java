@@ -2,10 +2,10 @@
  * Created by v_kal on 06.11.2016.
  */
 public enum ColorDays {
-    CURRENT_DAY_COLOR("\033[31m","<td class=\"Red\">"),
-    WEEKEND_COLOR("\033[34m","<td class=\"Blue\">"),
-    RESET_COLOR("\033[0m","<td class=\"Black\">"),
-    JUST_DAY("\033[0m","<td class=\"Black\">");
+    CURRENT_DAY_COLOR("\033[31m","<td class=\"CurrentDay\">"),
+    WEEKEND_COLOR("\033[34m","<td class=\"Weekend\">"),
+    RESET_COLOR("\033[0m","<td class=\"Just_day\">"),
+    JUST_DAY("\033[0m","<td class=\"Just_day\">");
 
     private String colorConsole;
     private String colorHTML;

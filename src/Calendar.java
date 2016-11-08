@@ -1,6 +1,7 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 /**
  * Created by v_kal on 06.11.2016.
  */
@@ -41,10 +42,14 @@ public class Calendar {
     }
   // =======================================================
    private void howToPrint(WayOfPrint wayOfPrint) {
-       if (wayOfPrint == WayOfPrint.HTML)
-           printer = new PrintHTML(weekStart);
-       else
-           printer = new PrintConsole(weekStart);
+       if (wayOfPrint == WayOfPrint.HTML) {
+           printer = new PrintHTML();
+           printer.setWeekStart(weekStart);
+       }
+       else {
+           printer = new PrintConsole();
+           printer.setWeekStart(weekStart);
+       }
    }
 
    public WayOfPrint getWayPrint() {
@@ -123,7 +128,8 @@ public class Calendar {
     }
 
     @Override
-    public String toString(){
-        return printer.toString();
+    public String toString()
+    {
+        return  printer.toString();
     }
 }
