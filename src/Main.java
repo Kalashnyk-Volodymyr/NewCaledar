@@ -23,8 +23,6 @@ public class Main {
         System.out.println(cl);
     }
 
-
-
     public static WayOfPrint choseWayOfPrint(){
         Scanner sc=new Scanner(System.in);
         System.out.println("chose the way of print: \nConsole\t1\nHTML\t2");

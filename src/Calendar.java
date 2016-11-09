@@ -1,7 +1,6 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 /**
  * Created by v_kal on 06.11.2016.
  */
@@ -11,7 +10,6 @@ public class Calendar {
     private LocalDate firstDayOfMonth;
     private LocalDate toDay;
     private Printer printer;
-
 
     public Calendar(DayOfWeek firstDayOfWeek) {
         toDay = LocalDate.now();
@@ -41,7 +39,6 @@ public class Calendar {
         }
     }
 
-    // =======================================================
     private void howToPrint(WayOfPrint wayOfPrint) {
         if (wayOfPrint == WayOfPrint.HTML) {
             printer = new PrintHTML();
@@ -59,7 +56,6 @@ public class Calendar {
             return WayOfPrint.HTML;
     }
 
-
     public void print(WayOfPrint wayOfPrint) {
 
         howToPrint(wayOfPrint);
@@ -69,10 +65,8 @@ public class Calendar {
         }
     }
 
-    // ======================================================
     private void printWeek() {
         printer.nextWeek();
-
         for (DayOfWeek day : weekStart)
             if (avoidDayOfAnotherMonth(day)) {
                 printer.printDay();
@@ -83,7 +77,6 @@ public class Calendar {
                 if (CurrentMonth()) continue;
                 else break;
             }
-
         printer.endWeek();
     }
 
@@ -117,7 +110,6 @@ public class Calendar {
         firstDayOfMonth = firstDayOfMonth.plusDays(1);
     }
 
-    @Override
     public String toString() {
         return printer.toString();
     }
