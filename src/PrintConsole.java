@@ -7,8 +7,7 @@ import java.util.Locale;
  * Created by v_kal on 06.11.2016.
  */
 public class PrintConsole extends Printer {
-    private String calendar="";
-    //public String getCalendar(){return  calendar;}
+    private String calendar = "";
 
     @Override
     public void setWeekStart(ArrayList<DayOfWeek> weekStart) {
@@ -20,13 +19,17 @@ public class PrintConsole extends Printer {
         calendar = calendar + color.getColorConsole() + day + ColorDays.RESET_COLOR.getColorConsole() + "\t";
     }
     @Override
+    public void printDay() {
+        calendar = calendar + "\t";
+    }
+
+    @Override
     public void nextWeek() {
         calendar = calendar + "\n";
     }
+
     @Override
-    public void ignoreDay() {
-        calendar = calendar + "\t";
-    }
+    public void endWeek(){  }
 
     @Override
     public String toString() {

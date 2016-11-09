@@ -8,7 +8,7 @@ import java.util.Locale;
  */
 public class PrintHTML extends Printer {
     private String calendar=""+getHmlBegin();
-    //public String getCalendar(){return  calendar;}
+
     @Override
     public void setWeekStart(ArrayList<DayOfWeek> weekStart) {
         calendar = calendar + "<tr>\n";
@@ -22,15 +22,16 @@ public class PrintHTML extends Printer {
         calendar = calendar + color.getColorHTML() + day + "</td>" + "\n";
     }
     @Override
+    public void printDay(){
+        calendar=calendar+"<td></td>";
+    }
+    @Override
     public void nextWeek() {
         calendar = calendar + "<tr>";
     }
 
-    public void endWeekHtml() { calendar = calendar + "</tr>"; }
     @Override
-    public void ignoreDay() {
-        calendar = calendar + "<td></td>";
-    }
+    public void endWeek() { calendar = calendar + "</tr>"; }
 
     private String getHmlBegin() {
         String beginHtml = "<!DOCTYPE html>\n" +

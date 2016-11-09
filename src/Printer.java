@@ -5,13 +5,14 @@ import java.util.ArrayList;
  */
 public abstract class Printer {
 
-    public Printer(){}
-
     public abstract void setWeekStart(ArrayList<DayOfWeek> weekStart);
 
     public abstract void printDay(int day, ColorDays color);
 
+    public abstract void printDay();
+
     public abstract void nextWeek();
 
-    public abstract void ignoreDay();
+    public abstract void endWeek();
+
 }

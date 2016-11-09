@@ -1,13 +1,13 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Set;
+
 /**
  * Created by v_kal on 06.11.2016.
  */
 public class Calendar {
-    private ArrayList<DayOfWeek> weekStart =new ArrayList<>();
-    private ArrayList<DayOfWeek> weekend =new ArrayList<>();
+    private ArrayList<DayOfWeek> weekStart = new ArrayList<>();
+    private ArrayList<DayOfWeek> weekend = new ArrayList<>();
     private LocalDate firstDayOfMonth;
     private LocalDate toDay;
     private Printer printer;
@@ -19,7 +19,7 @@ public class Calendar {
         setWeekStart(firstDayOfWeek);
     }
 
-    public Calendar(DayOfWeek firstDayOfWeek,String yourDate) {
+    public Calendar(DayOfWeek firstDayOfWeek, String yourDate) {
         this.toDay = LocalDate.parse(yourDate);
         firstDayOfMonth = toDay.withDayOfMonth(1);
         setWeekStart(firstDayOfWeek);
@@ -40,87 +40,77 @@ public class Calendar {
             weekend.add(d);
         }
     }
-  // =======================================================
-   private void howToPrint(WayOfPrint wayOfPrint) {
-       if (wayOfPrint == WayOfPrint.HTML) {
-           printer = new PrintHTML();
-           printer.setWeekStart(weekStart);
-       }
-       else {
-           printer = new PrintConsole();
-           printer.setWeekStart(weekStart);
-       }
-   }
 
-   public WayOfPrint getWayPrint() {
-       if (printer instanceof PrintConsole)
-           return WayOfPrint.CONSOLE;
-       else
-           return WayOfPrint.HTML;
-   }
+    // =======================================================
+    private void howToPrint(WayOfPrint wayOfPrint) {
+        if (wayOfPrint == WayOfPrint.HTML) {
+            printer = new PrintHTML();
+            printer.setWeekStart(weekStart);
+        } else {
+            printer = new PrintConsole();
+            printer.setWeekStart(weekStart);
+        }
+    }
+
+    public WayOfPrint getWayPrint() {
+        if (printer instanceof PrintConsole)
+            return WayOfPrint.CONSOLE;
+        else
+            return WayOfPrint.HTML;
+    }
 
 
-    public void print(WayOfPrint wayOfPrint){
+    public void print(WayOfPrint wayOfPrint) {
 
         howToPrint(wayOfPrint);
 
-        while (isCurrentMonth()){
+        while (CurrentMonth()) {
             printWeek();
         }
     }
+
     // ======================================================
     private void printWeek() {
         printer.nextWeek();
 
         for (DayOfWeek day : weekStart)
-            if (avoidDayOfAnotherMonth(day))
+            if (avoidDayOfAnotherMonth(day)) {
+                printer.printDay();
                 continue;
-            else {
-            printDayWithColor(getColor());
-            plusDay();
-            if (isCurrentMonth()) continue;
+            } else {
+                printDayWithColor(getColor());
+                plusDay();
+                if (CurrentMonth()) continue;
                 else break;
-        }
+            }
 
-        if (printer instanceof PrintHTML)
-            ((PrintHTML) printer).endWeekHtml();
-    }
-
-    private void printDayWithColor(ColorDays colorDays){
-
-        printer.printDay(firstDayOfMonth.getDayOfMonth(),colorDays);
-    }
-
-    private ColorDays getColor() {
-        if (isToday()) return ColorDays.CURRENT_DAY_COLOR;
-        if (isWeekend()) return ColorDays.WEEKEND_COLOR;
-        return ColorDays.JUST_DAY;
+        printer.endWeek();
     }
 
     private boolean avoidDayOfAnotherMonth(DayOfWeek day) {
-        if (day != firstDayOfMonth.getDayOfWeek()) {
-            printer.ignoreDay();
-            return true;
-        } else return false;
+        return day != firstDayOfMonth.getDayOfWeek();
     }
 
-    private boolean isWeekend() {
-        for (DayOfWeek d : weekend)
-            if (d == firstDayOfMonth.getDayOfWeek())
-                return true;
-        return false;
+    private void printDayWithColor(ColorDays colorDays) {
+        printer.printDay(firstDayOfMonth.getDayOfMonth(), colorDays);
     }
 
-    private boolean isToday(){
-        if(firstDayOfMonth.equals(toDay))
-            return true;
-        else return false;
+    private ColorDays getColor() {
+        if (Today()) return ColorDays.CURRENT_DAY_COLOR;
+        if (Weekend()) return ColorDays.WEEKEND_COLOR;
+        return ColorDays.JUST_DAY;
     }
 
-    private boolean isCurrentMonth() {
-        if (firstDayOfMonth.getMonth() == toDay.getMonth())
-            return true;
-        else return false;
+    private boolean Weekend() {
+        return weekend.contains(firstDayOfMonth.getDayOfWeek());
+    }
+
+    private boolean Today() {
+        return firstDayOfMonth.equals(toDay);
+    }
+
+    private boolean CurrentMonth() {
+        return firstDayOfMonth.getMonth() == toDay.getMonth();
     }
 
     private void plusDay() {
@@ -128,8 +118,7 @@ public class Calendar {
     }
 
     @Override
-    public String toString()
-    {
-        return  printer.toString();
+    public String toString() {
+        return printer.toString();
     }
 }
