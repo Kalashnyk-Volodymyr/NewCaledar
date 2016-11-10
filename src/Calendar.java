@@ -40,13 +40,13 @@ public class Calendar {
     }
 
     private void howToPrint(WayOfPrint wayOfPrint) {
-        if (wayOfPrint == WayOfPrint.HTML) {
+       // if (wayOfPrint == WayOfPrint.HTML) {
             printer = new PrintHTML();
             printer.setWeekStart(weekStart);
-        } else {
+       /* } else {
             printer = new PrintConsole();
             printer.setWeekStart(weekStart);
-        }
+        }*/
     }
 
     public WayOfPrint getWayPrint() {

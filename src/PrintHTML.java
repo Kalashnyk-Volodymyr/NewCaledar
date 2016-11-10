@@ -6,6 +6,7 @@ import java.util.Locale;
 /**
  * Created by v_kal on 06.11.2016.
  */
+/*
 public class PrintHTML extends Printer {
     private String calendar=""+getHmlBegin();
 
@@ -67,4 +68,30 @@ public class PrintHTML extends Printer {
     public String toString() {
         return calendar + "\n" + getHtmlEnd();
     }
+}*/
+public class PrintHTML extends Printer {
+  //  private String calendar="";
+    @Override
+    public void setWeekStart(ArrayList<DayOfWeek> weekStart) {
+        calendar = calendar + "<tr>\n";
+        for (DayOfWeek d : weekStart)
+            calendar = calendar + "<th>" +
+                    d.getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + "</th>\n";
+        calendar = calendar + "</tr>\n";
+    }
+    @Override
+    public void printDay(int day, ColorDays color) {
+        calendar = calendar + color.getColorHTML() + day + "</td>" + "\n";
+    }
+    @Override
+    public void printDay(){
+        calendar=calendar+"<td></td>";
+    }
+    @Override
+    public void nextWeek() {
+        calendar = calendar + "<tr>";
+    }
+    @Override
+    public void endWeek() { calendar = calendar + "</tr>"; }
+
 }
