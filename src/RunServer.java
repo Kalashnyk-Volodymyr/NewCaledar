@@ -95,7 +95,6 @@ public class RunServer {
         ServerSocket server = new ServerSocket(3575);
         System.out.println("server is running");
 
-
         String footer = "</body>\n" +
                 "</html>";
         while (true) {

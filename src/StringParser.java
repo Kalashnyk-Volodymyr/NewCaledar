@@ -16,7 +16,6 @@ public class StringParser {
         this.reader = reader;
     }
 
-
     public String parse() throws IOException {
         String parameters = reader.readLine().split(" ")[1];
         System.out.println("\"" + parameters + "\"");
@@ -53,6 +52,8 @@ public class StringParser {
         cl.setHolidays(DayOfWeek.MONDAY);
         cl.print(WayOfPrint.HTML);
         return new StringBuilder()
+                .append("<tr><a href=\"/\">Back</a></tr><br>")
+               // .append("<input type=\"submit\" value=\"view calendar\" onclick=\"window.location='calendar/';\" /> ")
                 .append("<table>")
                 .append(cl)
                 .append("</table>").toString();
